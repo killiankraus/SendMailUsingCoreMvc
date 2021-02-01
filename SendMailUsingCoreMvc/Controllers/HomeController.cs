@@ -71,7 +71,7 @@ namespace SendMailUsingCoreMvc.Controllers
                 SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
 
                 //Create nerwork credential and you need to give from email address and password
-                NetworkCredential networkCredential = new NetworkCredential("frank.delima.gavina@gmail.com", "o9971508667");
+                NetworkCredential networkCredential = new NetworkCredential("email", "pass");
                 smtpClient.UseDefaultCredentials = false;
                 smtpClient.Credentials = networkCredential;
                 smtpClient.Port = 587; // this is default port number - you can also change this
