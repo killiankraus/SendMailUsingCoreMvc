@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using SendMailUsingCoreMvc.Models;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using SendMailUsingCoreMvc.Models;
 
 namespace SendMailUsingCoreMvc.Controllers
 {
@@ -27,15 +30,10 @@ namespace SendMailUsingCoreMvc.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
         [HttpGet]
         public IActionResult ContactUs()
         {
+           
             return View();
         }
 
@@ -48,10 +46,10 @@ namespace SendMailUsingCoreMvc.Controllers
             {
                 MailMessage mail = new MailMessage();
                 // you need to enter your mail address
-                mail.From = new MailAddress("fromemailaddress@example.com");
+                mail.From = new MailAddress("frank.delima.gavina@example.com");
 
                 //To Email Address - your need to enter your to email address
-                mail.To.Add("toemailaddress@example.com");
+                mail.To.Add("earvin.nadonga.tulagan@gmail.com");
 
                 mail.Subject = sendMailDto.Subject;
 
@@ -70,14 +68,14 @@ namespace SendMailUsingCoreMvc.Controllers
                 //create SMTP instant
 
                 //you need to pass mail server address and you can also specify the port number if you required
-                SmtpClient smtpClient = new SmtpClient("mail.example.com");
+                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
 
                 //Create nerwork credential and you need to give from email address and password
-                NetworkCredential networkCredential = new NetworkCredential("fromemailaddress@example.com", "password");
+                NetworkCredential networkCredential = new NetworkCredential("frank.delima.gavina@gmail.com", "o9971508667");
                 smtpClient.UseDefaultCredentials = false;
                 smtpClient.Credentials = networkCredential;
-                smtpClient.Port = 25; // this is default port number - you can also change this
-                smtpClient.EnableSsl = false; // if ssl required you need to enable it
+                smtpClient.Port = 587; // this is default port number - you can also change this
+                smtpClient.EnableSsl = true; // if ssl required you need to enable it
                 smtpClient.Send(mail);
 
                 ViewBag.Message = "Mail Send";
@@ -92,6 +90,12 @@ namespace SendMailUsingCoreMvc.Controllers
                 ViewBag.Message = ex.Message.ToString();
             }
             return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

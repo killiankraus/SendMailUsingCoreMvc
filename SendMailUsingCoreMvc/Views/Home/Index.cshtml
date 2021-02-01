@@ -2,7 +2,23 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<div class="row">
+    <div class="col-md-6">
+        San Bartolome
+    </div>
+
+    <div class="col-md-6">
+        <div id="map" style="height:500px; width:700px; "></div>
+            <script>
+                var map;
+                function initMap() {
+                    map = new google.maps.Map(document.getElementById('map')), {
+                        center: { lat: 14.704548, lng: 121.037578 },
+                        zoom: 9
+                    });
+                }
+            </script>
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0EuTVYqnGcXHNssn7Tr1vqtG_BpFDS54&callback=initMap"
+                    type="text/javascript"></script>
+        </div>
+    </div>
